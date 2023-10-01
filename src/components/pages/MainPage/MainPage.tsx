@@ -1,14 +1,11 @@
 import "./MainPage.scss";
-import Typography from "@mui/material/Typography";
-import { ReactComponent as AddIcon } from "icons/Add.svg";
+import ContactsPage from "../ContactsPage/ContactsPage";
 
 function MainPage() {
   return (
     <div className="MainPage">
-      <Typography>dummy</Typography>
-      <AddIcon/>
+      <ContactsPage/>
     </div>
-            
   );
 }
 

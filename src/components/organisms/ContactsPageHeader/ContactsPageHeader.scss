@@ -1,0 +1,56 @@
+@import "/src/styles/variables.scss";
+
+.ContactsPageHeader{
+
+    .rowGridContainer{
+        height: 96px;
+        border-bottom: solid 1px;
+        border-color: $grey60;
+
+        .rowGridItem{
+
+            &.border{
+                border-right: solid 1px;
+                border-color: $grey60;
+            }
+
+            .verticalCenterContainer{
+                height: 96px;
+
+                &.middle{
+                    padding-left: 30px;
+                    padding-right: 30px;
+                }
+            }
+
+            .backArrowIconContainer{
+                margin-right: 30px;
+            }
+
+            .LightModeIconContainer{
+                margin-left: 30px;
+            }
+
+            .titleTextContacts{
+                font-family: "Glysa", sans-serif;
+                font-weight: 500;
+                font-size: 32px;
+                line-height: 48px;
+            }
+
+            .addNewButton{
+                color: $maxWhite;
+                font-family: "LexendDeca", sans-serif;
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 20px;
+                letter-spacing: 1%;
+                background:linear-gradient(0deg, $grey20 100%, $grey20 0%);
+                padding: 8px 16px 8px 12px;
+                margin-left: 10px;
+                border: solid 1px linear-gradient(0deg, $grey20 100%, $grey20 0%);
+                border-radius: 20px;
+            }
+        }
+    }
+}

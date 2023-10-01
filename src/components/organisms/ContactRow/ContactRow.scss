@@ -1,0 +1,52 @@
+@import "/src/styles/variables.scss";
+
+.ContactRow{
+    height: 64px;
+    border-right: solid 1px;
+    border-left: solid 1px;
+    border-color: $grey60;
+    padding-top: 22px;
+    padding-left: 30px;
+    padding-right: 30px;
+
+    .contactRowPicture{
+        height: 40px;
+        width: 40px;
+        border: solid 1px $grey60;
+        border-radius: 50%;
+        margin-right: 10px;
+    }
+
+    .contactRowName{
+        font-family: "LexendDeca", sans-serif;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 24px;
+        letter-spacing: 1%;
+        color: $maxWhite;
+    }
+
+    .contactRowNumber{
+        font-family: "LexendDeca", sans-serif;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 16px;
+        letter-spacing: 1%;
+        color: $maxWhite;
+        opacity: 56%;
+    }
+
+    .iconsOnHoverOnly{
+        visibility: hidden;
+
+        &.open {
+            visibility: visible;
+        }
+    }
+
+    &:hover{
+        .iconsOnHoverOnly{
+            visibility: visible;
+        }
+    }
+}

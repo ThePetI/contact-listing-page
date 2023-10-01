@@ -7,6 +7,16 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+@font-face {
+  font-family: 'Glysa';
+  src: local('Glysa'), url(/src/fonts/Glysa.otf) format('truetype');
+}
+
+@font-face {
+  font-family: 'LexendDeca';
+  src: local('LexendDeca'), url(/src/fonts/LexendDeca-VariableFont_wght.ttf) format('truetype');
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
