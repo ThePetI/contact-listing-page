@@ -1,0 +1,35 @@
+@import "/src/styles/variables.scss";
+
+.CustomLabelledTextField{
+
+    .label{
+        font-family: "LexendDeca", sans-serif;
+        color: $maxWhite;
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 16px;
+        letter-spacing: 1%;
+        padding-top: 15px;
+        padding-bottom: 3px;
+    }
+
+    .textField{
+
+        .MuiInputBase-root{
+            margin-bottom: 10px;
+            color: $maxWhite;
+            font-family: "LexendDeca", sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 17.5px;
+            background-color: $grey80;
+            border: solid 1px $grey60;
+            border-radius: 8px;
+        }
+
+        .MuiInputLabel-outlined{
+            opacity: 0;
+        }
+    }
+    
+}

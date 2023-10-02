@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Grid from '@mui/material/Grid';
 import Typography from "@mui/material/Typography";
 import IconButton from '@mui/material/IconButton';
@@ -7,9 +8,13 @@ import { ReactComponent as BackArrowIcon } from "icons/Back arrow.svg";
 import { ReactComponent as LightModeIcon } from "icons/Light mode.svg";
 import { ReactComponent as SettingsIcon } from "icons/Settings.svg";
 import { ReactComponent as ProfilePicIcon } from "icons/Profile pic.svg";
+import AddEditModal from "../AddEditModal/AddEditModal";
 import "./ContactsPageHeader.scss";
 
-function ContactsPageHeader() {
+function ContactsPageHeader({fetchContacts} : {fetchContacts: () => Promise<void>}) {
+
+    const [openModalAdd, setOpenModalAdd] = useState(false);
+
     return (
         <Grid item className="ContactsPageHeader">
             <Grid container direction={"column"}>
@@ -49,7 +54,7 @@ function ContactsPageHeader() {
                                             </IconButton>
                                         </Grid>
                                         <Grid item>
-                                            <Button className="addNewButton" variant="contained" startIcon={<AddIcon/>}>
+                                            <Button className="addNewButton" variant="contained" onClick={() => {setOpenModalAdd(true)}} startIcon={<AddIcon/>}>
                                                 Add new
                                             </Button>
                                         </Grid>
@@ -69,6 +74,11 @@ function ContactsPageHeader() {
                     </Grid>
                 </Grid>
             </Grid>
+        <AddEditModal
+            open={openModalAdd}
+            handleClose={setOpenModalAdd}
+            fetchContacts={fetchContacts}
+        />
         </Grid>
     );
 }

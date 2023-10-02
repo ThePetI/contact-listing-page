@@ -17,10 +17,10 @@ knex.schema
       return knex.schema
         .createTable("contacts", (table) => {
           table.increments("contactId").primary();
-          table.string("contactName").notNullable();
-          table.string("contactPhone").notNullable();
+          table.string("contactName"); //.notNullable();
+          table.string("contactPhone"); //.notNullable();
           table.string("contactEmail");
-          table.binary("contactPicture");
+          table.string("contactPicture"); //binary?
         })
         .then(() => {
           console.log("Table Contacts created");

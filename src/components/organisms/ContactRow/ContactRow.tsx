@@ -1,4 +1,5 @@
 import * as React from 'react';
+import axios from "axios";
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import Grid from '@mui/material/Grid';
@@ -13,8 +14,15 @@ import { ReactComponent as MoreIcon } from "icons/More.svg";
 import DropDownMenu from 'components/molecules/DropDownMenu/DropDownMenu';
 import dummyPict from "Timothy.png";
 import "./ContactRow.scss";
+interface ContactProps {
+    contactId: number;
+    contactName: string;
+    contactPhone: string;
+    contactEmail: string;
+    contactPicture: string;
+  }
 
-function ContactRow() {
+function ContactRow({contact, fetchContacts} : { contact : ContactProps, fetchContacts: () => Promise<void>  }) {
 
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const openMore = Boolean(anchorEl);
@@ -25,18 +33,28 @@ function ContactRow() {
       setAnchorEl(null);
     };
 
+  const handleContactRemove = (id: number) => {
+    axios
+      .put('http://localhost:4001/contacts/remove', { contactId: id })
+      .then(() => {
+        fetchContacts();
+        setAnchorEl(null);
+      })
+      .catch(error => console.error(`There was an error removing the contact: ${error}`))
+  }
+
   return (
     <Grid container className="ContactRow">
         <Grid item xs={0.8}>
-            <img src={dummyPict} className="contactRowPicture" alt="Profile picture"/>
+            <img src={contact.contactPicture} className="contactRowPicture" alt="Profile picture"/>
         </Grid>
         <Grid item xs={9}>
             <Grid container direction={"column"}>
                 <Grid item>
-                    <Typography className="contactRowName">Timothy Lewis</Typography>
+                    <Typography className="contactRowName">{contact.contactName}</Typography>
                 </Grid>
                 <Grid item>
-                    <Typography className="contactRowNumber">+36 01 234 5678</Typography>
+                    <Typography className="contactRowNumber">{contact.contactPhone}</Typography>
                 </Grid>
             </Grid>
         </Grid>
@@ -82,11 +100,11 @@ function ContactRow() {
                             <EditIcon />
                             Edit
                         </MenuItem>
-                        <MenuItem onClick={handleCloseMore} disableRipple>
+                        <MenuItem disableRipple>
                             <FavouriteIcon/>
                             Favourite
                         </MenuItem>
-                        <MenuItem onClick={handleCloseMore} disableRipple>
+                        <MenuItem onClick={() => handleContactRemove(contact.contactId)} disableRipple>
                             <RemoveIcon/>
                             Remove
                         </MenuItem>
