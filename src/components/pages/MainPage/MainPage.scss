@@ -1,5 +1,10 @@
-@import "/src/styles/variables.scss";
+@import "/src/styles/variables.module.scss";
 
 .MainPage{
     background-color: $grey100;
+    min-height: 100vh;
+
+    .MuiButton-root{
+        text-transform: none;
+    }
 }

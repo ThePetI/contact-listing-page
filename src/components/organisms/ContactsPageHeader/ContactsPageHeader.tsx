@@ -20,23 +20,23 @@ function ContactsPageHeader({fetchContacts} : {fetchContacts: () => Promise<void
             <Grid container direction={"column"}>
                 <Grid item>
                     <Grid container className="rowGridContainer" direction={"row"}>
-                        <Grid item md={3} className="rowGridItem border"></Grid>
-                        <Grid item md={6} className="rowGridItem border"></Grid>
-                        <Grid item md={3} className="rowGridItem"></Grid>
+                        <Grid item xl={3} lg={3} md={2} sm={1} xs={1} className="rowGridItem border"></Grid>
+                        <Grid item xl={6} lg={6} md={8} sm={10} xs={10} className="rowGridItem border"></Grid>
+                        <Grid item xl={3} lg={3} md={2} sm={1} xs={1} className="rowGridItem"></Grid>
                     </Grid>
                 </Grid>
                 <Grid item>
                     <Grid container className="rowGridContainer" direction={"row"}>
-                        <Grid item md={3} className="rowGridItem border">
+                        <Grid item xl={3} lg={3} md={2} sm={1} xs={1} className="rowGridItem border">
                             <Grid container className="verticalCenterContainer" direction={"row"} justifyContent={"flex-end"} alignItems={"center"}>
                                 <Grid item>
-                                    <IconButton className="backArrowIconContainer">
+                                    <IconButton className="secondaryIcon backArrowIconContainer">
                                         <BackArrowIcon/>
                                     </IconButton>
                                 </Grid>
                             </Grid>
                         </Grid>
-                        <Grid item md={6} className="rowGridItem border">
+                        <Grid item xl={6} lg={6} md={8} sm={10} xs={10} className="rowGridItem border">
                             <Grid container className="verticalCenterContainer middle" alignItems={"center"}>
                                 <Grid item md={5}>
                                     <Typography className="titleTextContacts">Contacts</Typography>
@@ -44,12 +44,12 @@ function ContactsPageHeader({fetchContacts} : {fetchContacts: () => Promise<void
                                 <Grid item md={7}>
                                     <Grid container justifyContent={"flex-end"}>
                                         <Grid item>
-                                            <IconButton className="">
+                                            <IconButton className="secondaryIcon">
                                                 <SettingsIcon/>
                                             </IconButton>
                                         </Grid>
                                         <Grid item>
-                                            <IconButton className="">
+                                            <IconButton className="secondaryIcon">
                                                 <ProfilePicIcon/>
                                             </IconButton>
                                         </Grid>
@@ -62,10 +62,10 @@ function ContactsPageHeader({fetchContacts} : {fetchContacts: () => Promise<void
                                 </Grid>
                             </Grid>
                         </Grid>
-                        <Grid item md={3} className="rowGridItem">
+                        <Grid item xl={3} lg={3} md={2} sm={1} xs={1} className="rowGridItem">
                             <Grid container className="verticalCenterContainer" direction={"row"} alignItems={"center"}>
                                 <Grid item>
-                                    <IconButton className="LightModeIconContainer">
+                                    <IconButton className="secondaryIcon LightModeIconContainer">
                                         <LightModeIcon/>
                                     </IconButton>
                                 </Grid>
@@ -74,11 +74,12 @@ function ContactsPageHeader({fetchContacts} : {fetchContacts: () => Promise<void
                     </Grid>
                 </Grid>
             </Grid>
-        <AddEditModal
-            open={openModalAdd}
-            handleClose={setOpenModalAdd}
-            fetchContacts={fetchContacts}
-        />
+            <AddEditModal
+                open={openModalAdd}
+                handleClose={setOpenModalAdd}
+                fetchContacts={fetchContacts}
+                contact={undefined}
+            />
         </Grid>
     );
 }

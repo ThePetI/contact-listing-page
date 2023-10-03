@@ -1,5 +1,6 @@
 import { styled } from '@mui/material/styles';
 import Menu, { MenuProps } from '@mui/material/Menu';
+import variables from "styles/variables.module.scss";
 
 const DropDownMenu = styled((props: MenuProps) => (
     <Menu
@@ -18,8 +19,8 @@ const DropDownMenu = styled((props: MenuProps) => (
   '& .MuiPaper-root': {
     borderRadius: 8,
     width: 219,
-    color: "rgba(255, 255, 255, 1)",
-    backgroundColor: "rgba(30, 30, 30, 1)",
+    color: variables.maxWhite,
+    backgroundColor: variables.grey80,
     '& .MuiMenu-list': {
       padding: 0,
     },
@@ -30,7 +31,7 @@ const DropDownMenu = styled((props: MenuProps) => (
         letterSpacing: 1,
         padding: "11px 21px",
         '&:hover': {
-            backgroundColor: "rgba(35, 35, 35, 1)",
+            backgroundColor: variables.grey70,
           },
       '& svg': {
             width: 20,

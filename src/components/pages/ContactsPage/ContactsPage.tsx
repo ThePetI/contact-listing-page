@@ -32,9 +32,9 @@ function ContactsPage() {
         <ContactsPageHeader fetchContacts={fetchContacts}/>
         <Grid item>
           <Grid container className="contactsGridContainer" direction={"row"}>
-            <Grid item md={3}></Grid>
+            <Grid item xl={3} lg={3} md={2} sm={1} xs={0}></Grid>
             { !loading &&
-            <Grid item md={6}>
+            <Grid item xl={6} lg={6} md={8} sm={10} xs={12} className="contactsGridContainerCenter">
               {contacts.map((contact, index) =>
                 <ContactRow
                   key={contact.contactId}
@@ -44,7 +44,7 @@ function ContactsPage() {
               )}
             </Grid>
             }
-            <Grid item md={3}></Grid>
+            <Grid item xl={3} lg={3} md={2} sm={1} xs={0}></Grid>
           </Grid>
         </Grid>
       </Grid>

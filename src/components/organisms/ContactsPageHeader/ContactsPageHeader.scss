@@ -1,4 +1,4 @@
-@import "/src/styles/variables.scss";
+@import "/src/styles/variables.module.scss";
 
 .ContactsPageHeader{
 
@@ -21,14 +21,51 @@
                     padding-left: 30px;
                     padding-right: 30px;
                 }
+                @media screen and (max-width: 505px)  {
+                    &.middle{
+                        padding-left: 5px;
+                        padding-right: 5px;
+                    }
+    
+                }
             }
 
-            .backArrowIconContainer{
-                margin-right: 30px;
+
+            .secondaryIcon{
+                border-radius: 8px;
+
+                &.backArrowIconContainer{
+                    margin-right: 30px;
+                }
+
+                &.LightModeIconContainer{
+                    margin-left: 30px;
+                }
+
+                @media screen and (max-width: 899px) and (min-width: 600px)  {
+                    &.backArrowIconContainer {
+                        margin-right: 10px;
+                    }
+                    &.LightModeIconContainer {
+                        margin-left: 10px;
+                    }
+                }
+                @media screen and (max-width: 599px)  {
+                    &.backArrowIconContainer {
+                        margin-right: 0px;
+                    }
+                    &.LightModeIconContainer {
+                        margin-left: 0px;
+                    }
+                }
             }
 
-            .LightModeIconContainer{
-                margin-left: 30px;
+            .secondaryIcon:hover {
+                background-color: $grey90;
+            }
+
+            .secondaryIcon:active {
+                background-color: $grey80;
             }
 
             .titleTextContacts{
@@ -45,7 +82,7 @@
                 font-size: 14px;
                 line-height: 20px;
                 letter-spacing: 1%;
-                background:linear-gradient(0deg, $grey20 100%, $grey20 0%);
+                background:linear-gradient(0deg, $grey60 70%, $grey60 100%);
                 padding: 8px 16px 8px 12px;
                 margin-left: 10px;
                 border: solid 1px linear-gradient(0deg, $grey20 100%, $grey20 0%);

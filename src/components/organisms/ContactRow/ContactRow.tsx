@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from "react";
 import axios from "axios";
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
@@ -12,7 +13,7 @@ import { ReactComponent as CallIcon } from "icons/Call.svg";
 import { ReactComponent as MuteIcon } from "icons/Mute.svg";
 import { ReactComponent as MoreIcon } from "icons/More.svg";
 import DropDownMenu from 'components/molecules/DropDownMenu/DropDownMenu';
-import dummyPict from "Timothy.png";
+import AddEditModal from "../AddEditModal/AddEditModal";
 import "./ContactRow.scss";
 interface ContactProps {
     contactId: number;
@@ -23,6 +24,8 @@ interface ContactProps {
   }
 
 function ContactRow({contact, fetchContacts} : { contact : ContactProps, fetchContacts: () => Promise<void>  }) {
+
+    const [openModalEdit, setOpenModalEdit] = useState(false);
 
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const openMore = Boolean(anchorEl);
@@ -43,12 +46,17 @@ function ContactRow({contact, fetchContacts} : { contact : ContactProps, fetchCo
       .catch(error => console.error(`There was an error removing the contact: ${error}`))
   }
 
+  const openEditModal = () => {
+    setOpenModalEdit(true);
+    handleCloseMore();
+  }
+
   return (
     <Grid container className="ContactRow">
-        <Grid item xs={0.8}>
-            <img src={contact.contactPicture} className="contactRowPicture" alt="Profile picture"/>
+        <Grid item xl={0.9} lg={1.1} md={1.1} sm={1.3} xs={1.5}>
+            <img src={contact.contactPicture} className="contactRowPicture" alt="Prof Pict"/>
         </Grid>
-        <Grid item xs={9}>
+        <Grid item xl={8.9} lg={8.2} md={8.2} sm={7.4} xs={7.1}>
             <Grid container direction={"column"}>
                 <Grid item>
                     <Typography className="contactRowName">{contact.contactName}</Typography>
@@ -58,7 +66,7 @@ function ContactRow({contact, fetchContacts} : { contact : ContactProps, fetchCo
                 </Grid>
             </Grid>
         </Grid>
-        <Grid item xs={2.2}>
+        <Grid item xl={2.2} lg={2.7} md={2.7} sm={3.3} xs={3.4}>
             <Grid container justifyContent={"flex-end"}>
                 <Grid item>
                     <IconButton className={ anchorEl ? "iconsOnHoverOnly open" : "iconsOnHoverOnly"}>
@@ -96,7 +104,7 @@ function ContactRow({contact, fetchContacts} : { contact : ContactProps, fetchCo
                         open={openMore}
                         onClose={handleCloseMore}
                     >
-                        <MenuItem onClick={handleCloseMore} disableRipple>
+                        <MenuItem onClick={openEditModal} disableRipple>
                             <EditIcon />
                             Edit
                         </MenuItem>
@@ -112,6 +120,12 @@ function ContactRow({contact, fetchContacts} : { contact : ContactProps, fetchCo
                 </Grid>
             </Grid>
         </Grid>
+        <AddEditModal
+            open={openModalEdit}
+            handleClose={setOpenModalEdit}
+            fetchContacts={fetchContacts}
+            contact={contact}
+        />
     </Grid>        
     );
 }

@@ -1,16 +1,28 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
+import IconButton from '@mui/material/IconButton';
 import { ReactComponent as AddIcon } from "icons/Add.svg";
+import { ReactComponent as ChangeIcon } from "icons/Change.svg";
+import { ReactComponent as RemoveIcon } from "icons/Delete.svg";
 import CustomLabelledTextField from "components/molecules/CustomLabelledTextField/CustomLabelledTextField";
 import DefaultPict from "pictures/Default.png";
-//import variables from "styles/variables.scss";
+import "./AddEditModal.scss";
+import variables from "styles/variables.module.scss";
 
-function AddEditModal({ open, handleClose, fetchContacts }: { open: boolean, handleClose:  React.Dispatch<React.SetStateAction<boolean>>, fetchContacts: () => Promise<void> }) {
+interface ContactProps {
+  contactId: number;
+  contactName: string;
+  contactPhone: string;
+  contactEmail: string;
+  contactPicture: string;
+}
+
+function AddEditModal({ open, contact, handleClose, fetchContacts } : { open: boolean, contact?: ContactProps, handleClose:  React.Dispatch<React.SetStateAction<boolean>>, fetchContacts: () => Promise<void> }) {
   const styleBox = {
     position: "absolute",
     top: "50%",
@@ -18,9 +30,9 @@ function AddEditModal({ open, handleClose, fetchContacts }: { open: boolean, han
     transform: "translate(-50%, -50%)",
     width: 364,
     height: 540,
-    bgcolor: "rgba(20, 20, 20, 1)",
+    bgcolor: variables.grey100,
     borderRadius: "8px",
-    padding: "24px 0px 0px 0px"
+    padding: "24px 0px 0px 0px",
   };
 
   const styleMainGrid = {
@@ -28,7 +40,7 @@ function AddEditModal({ open, handleClose, fetchContacts }: { open: boolean, han
   }
 
   const styleTitle = {
-    color: "rgba(255, 255, 255, 1)",
+    color: variables.maxWhite,
     fontFamily: "Glysa",
     fontSize: "24px",
     fontWeight: 500,
@@ -37,19 +49,40 @@ function AddEditModal({ open, handleClose, fetchContacts }: { open: boolean, han
     marginTop: "-20px"
   };
 
+  const stylePictureGrid = {
+    height: "92px",
+    width: "88px"
+  }
+
   const styleAddPictureButton = {
     fontFamily: "LexendDeca",
     fontSize: "14px",
     fontWeight: 400,
     lineHeight: "17.5px",
-    color: "rgba(255, 255, 255, 1)",
-    bgcolor: "rgba(45, 45, 45, 1)",
+    color: variables.maxWhite,
+    bgcolor: variables.grey60,
     borderRadius: "8px",
     padding: "8px 16px 8px 12px",
     marginLeft: "15px",
     '&:hover': {
-        backgroundColor: "rgba(35, 35, 35, 1)",
+        backgroundColor: variables.grey50,
       },
+    '&:active': {
+      backgroundColor: variables.grey40,
+    },
+  }
+
+  const styleRemoveIcon = {
+    padding: "8px",
+    borderRadius: "8px",
+    bgcolor: variables.grey60,
+    marginLeft: "8px",
+    '&:hover': {
+      backgroundColor: variables.grey50,
+    },
+    '&:active': {
+      backgroundColor: variables.grey40,
+    },
   }
 
   const styleFinishButtonGrid = {
@@ -58,8 +91,8 @@ function AddEditModal({ open, handleClose, fetchContacts }: { open: boolean, han
   }
 
   const styleFinishButtonDone = {
-    color: "rgba(255, 255, 255, 1)",
-    bgcolor: "rgba(38, 38, 38, 1)",
+    color: variables.maxWhite,
+    bgcolor: variables.grey60,
     height: "40px",
     fontFamily: "LexendDeca",
     fontSize: "14px",
@@ -67,17 +100,26 @@ function AddEditModal({ open, handleClose, fetchContacts }: { open: boolean, han
     lineHeight: "17.5px",
     marginLeft: "15px",
     '&:hover': {
-        backgroundColor: "rgba(35, 35, 35, 1)",
+        backgroundColor: variables.grey50,
       },
+    '&:active': {
+      backgroundColor: variables.grey40,
+    },
   }
 
   const styleFinishButtonCancel = {
-    color: "rgba(255, 255, 255, 1)",
+    color: variables.maxWhite,
     height: "40px",
     fontFamily: "LexendDeca",
     fontSize: "14px",
     fontWeight: 400,
     lineHeight: "17.5px",
+    '&:hover': {
+      backgroundColor: variables.grey90,
+    },
+    '&:active': {
+      backgroundColor: variables.grey80,
+    },
   }
 
   const [name, setName] = useState("");
@@ -86,6 +128,16 @@ function AddEditModal({ open, handleClose, fetchContacts }: { open: boolean, han
   const [selectedPicture, setSelectedPicture] = useState("");
 
   const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if(!contact){
+      return;
+    }
+    setName(contact.contactName);
+    setPhoneNumber(contact.contactPhone);
+    setEmail(contact.contactEmail);
+    setSelectedPicture(contact.contactPicture);
+  }, [contact]);
 
   const handleClickAddPicture = () => {
     inputRef.current?.click();
@@ -129,20 +181,36 @@ function AddEditModal({ open, handleClose, fetchContacts }: { open: boolean, han
       .catch(error => console.error(`There was an error creating the ${name} contact: ${error}`))
   }
 
+  const handleContactUpdate = () => {
+    axios.put('http://localhost:4001/contacts/update', {
+      contactId: contact?.contactId,
+      contactName: name,
+      contactPhone: phoneNumber,
+      contactEmail: email,
+      contactPicture: selectedPicture
+    })
+    .then(() => {
+      fetchContacts();
+      handleInputsReset();
+      handleClose(false);
+    })
+    .catch(error => console.error(`There was an error updating the contact: ${error}`))
+  }
+
   return (
     <Modal open={open}>
       <Box sx={styleBox}>
-        <Grid container direction={"column"} sx={styleMainGrid}>
+        <Grid container className="AddEditModal" direction={"column"} sx={styleMainGrid}>
           <Grid item>
-            <Typography sx={styleTitle}>Add contact</Typography>
+            <Typography sx={styleTitle}>{contact ? "Edit contact" : "Add contact"}</Typography>
           </Grid>
           <Grid item>
             <Grid container alignItems="center">
-                <Grid item>
+                <Grid item sx={stylePictureGrid}>
                     <img
                         id="profile-picture"
                         src={selectedPicture || DefaultPict}
-                        alt="Profile picture"
+                        alt="Profile"
                         style={{
                             borderRadius: "50%",
                             height: 88,
@@ -159,10 +227,16 @@ function AddEditModal({ open, handleClose, fetchContacts }: { open: boolean, han
                         onChange={handleFileChange}
                         id="file-input"
                     />
-                    <Button variant="contained" sx={styleAddPictureButton} startIcon={<AddIcon/>} onClick={handleClickAddPicture}>
-                        Add picture
+                    <Button variant="contained" sx={styleAddPictureButton} startIcon={contact? <ChangeIcon/> : <AddIcon/>} onClick={handleClickAddPicture}>
+                        {contact ? "Change picture" : "Add picture"}
                     </Button>
                 </Grid>
+                {contact &&
+                  <Grid item>
+                    <IconButton sx={styleRemoveIcon}>
+                      <RemoveIcon/>
+                    </IconButton>
+                  </Grid>}
             </Grid>
           </Grid>
           <Grid item>
@@ -203,7 +277,7 @@ function AddEditModal({ open, handleClose, fetchContacts }: { open: boolean, han
                     </Button>
                 </Grid>
                 <Grid item>
-                    <Button variant="contained" sx={styleFinishButtonDone} onClick={handleContactCreate}>
+                    <Button variant="contained" sx={styleFinishButtonDone} onClick={ contact ? handleContactUpdate : handleContactCreate}>
                         Done
                     </Button>
                 </Grid>
