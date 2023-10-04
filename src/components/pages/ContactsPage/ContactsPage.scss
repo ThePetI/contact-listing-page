@@ -3,24 +3,20 @@
 .ContactsPage{
     color: $maxWhite;
 
-    .columnGridContainer{
-
-        .contactsGridContainer{
-            min-height: calc(100vh - 192px);
-
-            @media screen and (max-width: 699px)  {
-                .contactsGridContainer {
-                    min-height: calc(100vh - 144px);
-                }
-            }
-
-            .contactsGridContainerCenter{
-                border-right: solid 1px;
-                border-left: solid 1px;
-                border-color: $grey60;
-                padding-bottom: 30px;
-            }
+    .contactsGridContainer{
+        min-height: calc(100vh - 192px);
+        
+        .contactsGridContainerCenter{
+            border-right: solid 1px;
+            border-left: solid 1px;
+            border-color: $grey60;
+            padding-bottom: 30px;
         }
     }
 
+    @media screen and (max-width: 699px)  {
+        .contactsGridContainer {
+            min-height: calc(100vh - 144px);
+        }
+    }
 }

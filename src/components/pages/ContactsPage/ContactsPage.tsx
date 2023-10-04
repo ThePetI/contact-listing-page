@@ -26,9 +26,11 @@ function ContactsPage() {
 
   return (
     <div className="ContactsPage">
-      <Grid container className="columnGridContainer" direction={"column"}>
-        <ContactsPageHeader fetchContacts={fetchContacts}/>
-        <Grid item>
+      <Grid container direction={"row"}>
+        <Grid item xs={12}>
+          <ContactsPageHeader fetchContacts={fetchContacts}/>
+        </Grid>
+        <Grid item xs={12}>
           <Grid container className="contactsGridContainer" direction={"row"}>
             <Grid item xl={3} lg={3} md={2} sm={1} xs={0}></Grid>
             { !loading &&
