@@ -1,17 +1,19 @@
 @import "/src/styles/variables.module.scss";
 
 .ContactRow{
-    height: 64px;
+    min-height: 64px;
     padding-top: 22px;
     padding-left: 30px;
     padding-right: 30px;
 
-    .contactRowPicture{
-        height: 40px;
-        width: 40px;
-        border: solid 1px $grey60;
-        border-radius: 50%;
-        //margin-right: 10px;
+    .contactRowPictureItemContainer{
+        margin: auto;
+        .contactRowPicture{
+            height: 40px;
+            width: 40px;
+            border: solid 1px $grey60;
+            border-radius: 50%;
+        }
     }
 
     .contactRowName{
@@ -33,24 +35,59 @@
         opacity: 56%;
     }
 
-    .iconsOnHoverOnly{
-        border-radius: 8px;
-        visibility: hidden;
+    .iconsOnHoverOnlyContainer{
+        margin: auto;
 
-        &.open {
-            visibility: visible;
+        .iconsOnHoverOnly{
+            border-radius: 8px;
+            visibility: hidden;
+
+            &.open {
+                visibility: visible;
+            }
+        }
+        .iconsOnHoverOnly:hover{
+            background-color: $grey90;
+        }
+        .iconsOnHoverOnly:active{
+            background-color: $grey80;
+        }
+
+        &:hover{
+            .iconsOnHoverOnly{
+                visibility: visible;
+            }
         }
     }
-    .iconsOnHoverOnly:hover{
-        background-color: $grey90;
+
+    @media screen and (max-width: 485px)  {
+        padding-left: 15px;
+        padding-right: 15px;
+        .iconsOnHoverOnlyContainer{
+            .iconsOnHoverOnly {
+                &.hideOnSmall{
+                    display: none;
+                }
+            }
+        }
     }
-    .iconsOnHoverOnly:active{
-        background-color: $grey80;
+    
+
+    @media screen  and (max-width: 485px) and (min-width: 440px)  {
+        .contactRowName {
+            margin-left: -5px;
+        }
+        .contactRowNumber {
+            margin-left: -5px;
+        }
     }
 
-    &:hover{
-        .iconsOnHoverOnly{
-            visibility: visible;
+    @media screen  and (max-width: 380px) {
+        .contactRowName {
+            margin-left: 10px;
+        }
+        .contactRowNumber {
+            margin-left: 10px;
         }
     }
 }

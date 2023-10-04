@@ -33,6 +33,12 @@ function AddEditModal({ open, contact, handleClose, fetchContacts } : { open: bo
     bgcolor: variables.grey100,
     borderRadius: "8px",
     padding: "24px 0px 0px 0px",
+    "@media (max-width: 390px)":{
+      transform: "translate(-50%, -50%) scale(0.9)",
+    },
+    "@media (max-width: 350px)":{
+      transform: "translate(-50%, -50%) scale(0.8)",
+    },
   };
 
   const styleMainGrid = {
@@ -155,6 +161,8 @@ function AddEditModal({ open, contact, handleClose, fetchContacts } : { open: bo
     if (!fileObj) {
       return;
     }
+
+    console.log(fileObj);
 
     toBase64(fileObj).then(fileBase64String => {
       setSelectedPicture(fileBase64String as string);

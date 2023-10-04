@@ -12,6 +12,7 @@ import { ReactComponent as RemoveIcon } from "icons/Delete.svg";
 import { ReactComponent as CallIcon } from "icons/Call.svg";
 import { ReactComponent as MuteIcon } from "icons/Mute.svg";
 import { ReactComponent as MoreIcon } from "icons/More.svg";
+import DefaultPict from "pictures/Default.png";
 import DropDownMenu from 'components/molecules/DropDownMenu/DropDownMenu';
 import AddEditModal from "../AddEditModal/AddEditModal";
 import "./ContactRow.scss";
@@ -53,36 +54,36 @@ function ContactRow({contact, fetchContacts} : { contact : ContactProps, fetchCo
 
   return (
     <Grid container className="ContactRow">
-        <Grid item xl={0.9} lg={1.1} md={1.1} sm={1.3} xs={1.5}>
-            <img src={contact.contactPicture} className="contactRowPicture" alt="Prof Pict"/>
+        <Grid item xl={0.9} lg={1.1} md={1.1} sm={1.3} xs={1.5} className="contactRowPictureItemContainer">
+            <img src={contact.contactPicture || DefaultPict} className="contactRowPicture" alt="Prof Pict"/>
         </Grid>
         <Grid item xl={8.9} lg={8.2} md={8.2} sm={7.4} xs={7.1}>
             <Grid container direction={"column"}>
                 <Grid item>
-                    <Typography className="contactRowName">{contact.contactName}</Typography>
+                    <Typography style={{overflow: "hidden"}} className="contactRowName">{contact.contactName}</Typography>
                 </Grid>
                 <Grid item>
                     <Typography className="contactRowNumber">{contact.contactPhone}</Typography>
                 </Grid>
             </Grid>
         </Grid>
-        <Grid item xl={2.2} lg={2.7} md={2.7} sm={3.3} xs={3.4}>
+        <Grid item xl={2.2} lg={2.7} md={2.7} sm={3.3} xs={3.4} className="iconsOnHoverOnlyContainer">
             <Grid container justifyContent={"flex-end"}>
                 <Grid item>
-                    <IconButton className={ anchorEl ? "iconsOnHoverOnly open" : "iconsOnHoverOnly"}>
+                    <IconButton className={ anchorEl ? "iconsOnHoverOnly open hideOnSmall" : "iconsOnHoverOnly hideOnSmall"}>
                         <CallIcon/>
                     </IconButton>
                 </Grid>
                 <Grid item>
-                    <IconButton className={ anchorEl ? "iconsOnHoverOnly open" : "iconsOnHoverOnly"}>
+                    <IconButton className={ anchorEl ? "iconsOnHoverOnly open hideOnSmall" : "iconsOnHoverOnly hideOnSmall"}>
                         <MuteIcon/>
                     </IconButton>
                 </Grid>
                 <Grid item>
                     <Button
                         className={ anchorEl ? "iconsOnHoverOnly open" : "iconsOnHoverOnly"}
-                        id="demo-customized-button"
-                        aria-controls={openMore ? 'demo-customized-menu' : undefined}
+                        id="customized-button"
+                        aria-controls={openMore ? 'customized-menu' : undefined}
                         aria-haspopup="true"
                         aria-expanded={openMore ? 'true' : undefined}
                         variant="text"
@@ -96,14 +97,22 @@ function ContactRow({contact, fetchContacts} : { contact : ContactProps, fetchCo
                         endIcon={<MoreIcon/>}
                     />
                     <DropDownMenu
-                        id="demo-customized-menu"
+                        id="customized-menu"
                         MenuListProps={{
-                        'aria-labelledby': 'demo-customized-button',
+                        'aria-labelledby': 'customized-button',
                         }}
                         anchorEl={anchorEl}
                         open={openMore}
                         onClose={handleCloseMore}
                     >
+                        <MenuItem disableRipple className="hideOnLarge">
+                            <CallIcon/>
+                            Call
+                        </MenuItem>
+                        <MenuItem disableRipple className="hideOnLarge">
+                            <MuteIcon/>
+                            Mute
+                        </MenuItem>
                         <MenuItem onClick={openEditModal} disableRipple>
                             <EditIcon />
                             Edit

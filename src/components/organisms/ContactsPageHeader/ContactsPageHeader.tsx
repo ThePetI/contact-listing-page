@@ -19,15 +19,15 @@ function ContactsPageHeader({fetchContacts} : {fetchContacts: () => Promise<void
         <Grid item className="ContactsPageHeader">
             <Grid container direction={"column"}>
                 <Grid item>
-                    <Grid container className="rowGridContainer" direction={"row"}>
-                        <Grid item xl={3} lg={3} md={2} sm={1} xs={1} className="rowGridItem border"></Grid>
-                        <Grid item xl={6} lg={6} md={8} sm={10} xs={10} className="rowGridItem border"></Grid>
-                        <Grid item xl={3} lg={3} md={2} sm={1} xs={1} className="rowGridItem"></Grid>
+                    <Grid container className="rowGridContainer topHeader" direction={"row"}>
+                        <Grid item xl={3} lg={3} md={2} sm={1} xs={2} className="rowGridItem border"></Grid>
+                        <Grid item xl={6} lg={6} md={8} sm={10} xs={8} className="rowGridItem border"></Grid>
+                        <Grid item xl={3} lg={3} md={2} sm={1} xs={2} className="rowGridItem"></Grid>
                     </Grid>
                 </Grid>
                 <Grid item>
                     <Grid container className="rowGridContainer" direction={"row"}>
-                        <Grid item xl={3} lg={3} md={2} sm={1} xs={1} className="rowGridItem border">
+                        <Grid item xl={3} lg={3} md={2} sm={1} xs={2} className="rowGridItem border">
                             <Grid container className="verticalCenterContainer" direction={"row"} justifyContent={"flex-end"} alignItems={"center"}>
                                 <Grid item>
                                     <IconButton className="secondaryIcon backArrowIconContainer">
@@ -36,13 +36,13 @@ function ContactsPageHeader({fetchContacts} : {fetchContacts: () => Promise<void
                                 </Grid>
                             </Grid>
                         </Grid>
-                        <Grid item xl={6} lg={6} md={8} sm={10} xs={10} className="rowGridItem border">
+                        <Grid item xl={6} lg={6} md={8} sm={10} xs={8} className="rowGridItem border">
                             <Grid container className="verticalCenterContainer middle" alignItems={"center"}>
-                                <Grid item md={5}>
+                                <Grid item md={5} sm={5} xs={12}>
                                     <Typography className="titleTextContacts">Contacts</Typography>
                                 </Grid>
-                                <Grid item md={7}>
-                                    <Grid container justifyContent={"flex-end"}>
+                                <Grid item md={7} sm={7} xs={12}>
+                                    <Grid container className="headerMiddleIconContainer" justifyContent={"flex-end"}>
                                         <Grid item>
                                             <IconButton className="secondaryIcon">
                                                 <SettingsIcon/>
@@ -62,7 +62,7 @@ function ContactsPageHeader({fetchContacts} : {fetchContacts: () => Promise<void
                                 </Grid>
                             </Grid>
                         </Grid>
-                        <Grid item xl={3} lg={3} md={2} sm={1} xs={1} className="rowGridItem">
+                        <Grid item xl={3} lg={3} md={2} sm={1} xs={2} className="rowGridItem">
                             <Grid container className="verticalCenterContainer" direction={"row"} alignItems={"center"}>
                                 <Grid item>
                                     <IconButton className="secondaryIcon LightModeIconContainer">

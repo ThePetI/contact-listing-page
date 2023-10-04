@@ -1,6 +1,7 @@
 import { styled } from '@mui/material/styles';
 import Menu, { MenuProps } from '@mui/material/Menu';
 import variables from "styles/variables.module.scss";
+import "./DropDownMenu.scss"
 
 const DropDownMenu = styled((props: MenuProps) => (
     <Menu

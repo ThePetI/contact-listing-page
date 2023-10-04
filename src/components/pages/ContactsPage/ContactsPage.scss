@@ -8,6 +8,12 @@
         .contactsGridContainer{
             min-height: calc(100vh - 192px);
 
+            @media screen and (max-width: 699px)  {
+                .contactsGridContainer {
+                    min-height: calc(100vh - 144px);
+                }
+            }
+
             .contactsGridContainerCenter{
                 border-right: solid 1px;
                 border-left: solid 1px;

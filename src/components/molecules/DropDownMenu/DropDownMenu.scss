@@ -1,0 +1,12 @@
+@media screen  and (min-width: 486px)  {
+.MuiPaper-root{
+    .MuiMenu-list{
+        .MuiMenuItem-root:first-child{
+            display: none;
+        }
+        .MuiMenuItem-root:nth-child(2){
+            display: none;
+        }
+    }
+}
+}
