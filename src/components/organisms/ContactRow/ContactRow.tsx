@@ -57,7 +57,7 @@ function ContactRow({contact, fetchContacts} : { contact : ContactProps, fetchCo
         <Grid item xl={0.9} lg={1.1} md={1.1} sm={1.3} xs={1.5} className="contactRowPictureItemContainer">
             <img src={contact.contactPicture || DefaultPict} className="contactRowPicture" alt="Prof Pict"/>
         </Grid>
-        <Grid item xl={8.9} lg={8.2} md={8.2} sm={7.4} xs={7.1}>
+        <Grid item xl={8.9} lg={8.1} md={8.1} sm={7.3} xs={7.1}>
             <Grid container direction={"column"}>
                 <Grid item>
                     <Typography style={{overflow: "hidden"}} className="contactRowName">{contact.contactName}</Typography>
@@ -67,7 +67,7 @@ function ContactRow({contact, fetchContacts} : { contact : ContactProps, fetchCo
                 </Grid>
             </Grid>
         </Grid>
-        <Grid item xl={2.2} lg={2.7} md={2.7} sm={3.3} xs={3.4} className="iconsOnHoverOnlyContainer">
+        <Grid item xl={2.2} lg={2.8} md={2.8} sm={3.4} xs={3.4} className="iconsOnHoverOnlyContainer">
             <Grid container justifyContent={"flex-end"}>
                 <Grid item>
                     <IconButton className={ anchorEl ? "iconsOnHoverOnly open hideOnSmall" : "iconsOnHoverOnly hideOnSmall"}>
