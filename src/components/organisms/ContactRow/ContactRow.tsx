@@ -60,7 +60,7 @@ function ContactRow({contact, fetchContacts} : { contact : ContactProps, fetchCo
         <Grid item xl={8.9} lg={8.1} md={8.1} sm={7.3} xs={7.1}>
             <Grid container direction={"column"}>
                 <Grid item>
-                    <Typography style={{overflow: "hidden"}} className="contactRowName">{contact.contactName}</Typography>
+                    <Typography className="contactRowName">{contact.contactName}</Typography>
                 </Grid>
                 <Grid item>
                     <Typography className="contactRowNumber">{contact.contactPhone}</Typography>
