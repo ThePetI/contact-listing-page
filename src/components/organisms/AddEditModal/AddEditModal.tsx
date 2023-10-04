@@ -143,14 +143,23 @@ function AddEditModal({ open, contact, handleClose, fetchContacts } : { open: bo
     inputRef.current?.click();
   };
 
+  const toBase64 = (file: File) => new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = reject;
+});
+
   const handleFileChange = ( event: React.ChangeEvent<HTMLInputElement>) => {
-    const fileObj = event.target.files?.[0];
+    const fileObj : File = event.target.files?.[0]!;
     if (!fileObj) {
       return;
     }
 
-    setSelectedPicture(URL.createObjectURL(fileObj));
-    event.target.value = "";
+    toBase64(fileObj).then(fileBase64String => {
+      setSelectedPicture(fileBase64String as string);
+      event.target.value = "";
+    })
   };
 
   const handleInputsReset = () => {

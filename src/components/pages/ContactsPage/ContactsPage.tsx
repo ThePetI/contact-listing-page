@@ -24,8 +24,6 @@ function ContactsPage() {
       .catch(error => console.error(`There was an error retrieving the contact list: ${error}`))
   }
 
-  console.log(contacts);
-
   return (
     <div className="ContactsPage">
       <Grid container className="columnGridContainer" direction={"column"}>
